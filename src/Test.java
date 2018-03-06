@@ -5,8 +5,7 @@ import java.util.Stack;
 public class Test {
 
 	public static void main(String args[]) {
-		List<List<Integer>> res = N216.combinationSum3(3, 9);
-		System.out.println(res);
+		System.out.println(Affirm.prefixToPostfix("*+AB-CD"));
 	}
 	
     public static List<List<Integer>> permuteUnique(int[] nums) {
