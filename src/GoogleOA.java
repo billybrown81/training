@@ -29,18 +29,23 @@ public class GoogleOA {
 		}
 		for (int digit : set) {
 			path[depth] = digit;
-			DFSHelper(set, path, now, depth + 1);
+			Set<Integer> newSet = new HashSet<>(set);
+			newSet.remove(digit);
+			DFSHelper(newSet, path, now, depth + 1);
 		}
 		
 	}
 
 	private static int timeDiff(int t1, int t2) {
-		if (t1 >= t2) return Integer.MAX_VALUE;
-		return t2 - t1;
+		if (t1 == t2) return Integer.MAX_VALUE;
+		if (t1 < t2) return t2 - t1;
+		else return t2 - t1 + 24 * 60;
 	}
 
 	private static int toMinute(String time) {
 		String t[] = time.split(":");
 		return Integer.parseInt(t[0]) * 60 + Integer.parseInt(t[1]);
 	}
+	
+	
 }
