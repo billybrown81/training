@@ -5,11 +5,14 @@ import java.util.Stack;
 public class Test {
 
 	public static void main(String args[]) {
-		int[] flowers = {1, 3, 2};
+		int[] flowers = {1, 2, 4, 5, 7, 8, 6, 3};
 		int k = 1;
 		System.out.println(N683.kEmptySlots2(flowers, k));
 		System.out.println(GoogleOA.nextClosestTime("23:59"));
 		System.out.println(N159.lengthOfLongestSubstringTwoDistinct("eceba"));
+		System.out.println(GoogleOA.kFlowerFirst(flowers, k));
+		System.out.println(GoogleOA.kFlowerLast(flowers, k));
+		System.out.println(GoogleOA.kSlotsLast(flowers, k));
 	}
 	
     public static List<List<Integer>> permuteUnique(int[] nums) {
