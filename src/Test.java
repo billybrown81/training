@@ -5,7 +5,11 @@ import java.util.Stack;
 public class Test {
 
 	public static void main(String args[]) {
-		System.out.println(N267.generatePalindromes("aabb"));
+		if (N290.wordPattern("abba", "dog cat cat dog")) {
+			System.out.println("True");
+		} else {
+			System.out.println("False");
+		}
 	}
 	
     public static List<List<Integer>> permuteUnique(int[] nums) {
