@@ -1,7 +1,8 @@
 package leetcode;
 
 public class RandomListNode {
-	 int label;
-	 RandomListNode next, random;
-	 RandomListNode(int x) { this.label = x; }
+	 public int label;
+	 public RandomListNode next;
+	public RandomListNode random;
+	 public RandomListNode(int x) { this.label = x; }
 }
