@@ -129,4 +129,24 @@ public class Bloomberg {
 		}
         return head;
     }
+    
+    //Leetcode 91 Decode Ways
+    public int numDecodings(String s) {
+        int size = s.length();
+        if (size == 0) {
+			return 0;
+		}
+        if (size == 1) {
+			return (s.charAt(0) == '0') ? 0 : 1;
+		}
+        int[] map = new int[size + 1];
+        map[size] = 1;
+        map[size - 1] = (s.charAt(size - 1) - '0' == 0) ? 0 : 1;
+        
+        for (int i = size - 2; i >= 0; i--) {
+        		if (s.charAt(i) == '0') continue;
+			map[i] = (Integer.valueOf(s.substring(i, i + 2)) <= 26)? map[i + 1] + map[i + 2] : map[i + 1];
+		}
+        return map[0];
+    }
 }

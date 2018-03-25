@@ -53,6 +53,7 @@ public class GoogleOA {
 			if (low != null && low == x - k - 1) return i + 1;
 			if (high != null && high == x + k + 1) return i + 1;
 		}
+		
 		return -1;
 	}
 	
