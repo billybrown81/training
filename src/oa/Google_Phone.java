@@ -3,10 +3,16 @@ package oa;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
+
+import leetcode.TreeLinkNode;
+import leetcode.TreeNode;
 
 public class Google_Phone {
 	
@@ -88,7 +94,6 @@ public class Google_Phone {
 			map.put(i, map.getOrDefault(i, 0) + 1);
 		}
         PriorityQueue<Map.Entry<Integer, Integer>> heap = new PriorityQueue<>((a, b) -> b.getValue() - a.getValue());
-
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 			heap.offer(entry);
 		}
@@ -137,5 +142,119 @@ public class Google_Phone {
 			if (pick < population[i]) res = i;
 		}
 		return res;
+		
+		
 	}
+	
+//	222. Count Complete Tree Nodes
+    public int countNodes(TreeNode root) { 
+		if (root == null) return 0;
+		int count = 1;
+		TreeNode left = root.left, right = root.left;
+		while (right != null) {
+			left = left.left;
+			right = right.right;
+			count = count << 1;
+		}
+		return count + (left == null? countNodes(root.right) : countNodes(root.left));
+    }
+    
+ //   98. Validate Binary Search Tree
+    public boolean isValidBST(TreeNode root) {
+		return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+}
+
+private boolean isValidBST(TreeNode root, long minValue, long maxValue) {
+	if (root == null) return true;
+	if (root.val <= minValue || root.val >= maxValue) return false; 
+	return isValidBST(root.left, minValue, root.val) && isValidBST(root.right, root.val, maxValue);
+}
+
+
+//1. In an array with positive, negative and zero floats, find continuous subarray that has maximum
+//product, output the start and end index of this subarray.. From 1point
+
+//被坑了，特别恶心的一道dp n / 2 where n is even
+//有个函数 y =
+//3n + 1 otherwise. 1point3acres.com/bbs
+//有一个数，n，然后不断求f(x)，例如5，16，8，4，2，1。长度为6。记为len(5) = 6
+//我们有一个数n，len(n), len(n - 1), len(n - 2).... len(2), len(1)的最大值。
+
+	public static int maxLength(int n) {
+		int[] dp = new int[n + 1];
+		dp[1] = 1;
+		int res = 0;
+		for (int i = 2; i <= n; i++) {
+			int tmp = i, len = 0;
+			while (tmp > 1) {
+				if (tmp % 2 == 0) {
+					tmp /= 2; len++;
+				} else {
+					tmp = tmp * 3 + 1;
+					len++;
+				}
+				if (tmp <= n && dp[tmp] != 0) {
+					len += dp[tmp];
+					break;
+				}
+			}
+			dp[i] = len;
+			res = Math.max(res, len);
+		}
+		return res;
+	}
+	
+	//Leetcode 116. Populating Next Right Pointers in Each Node
+    public void connect(TreeLinkNode root) {
+        if (root == null) return;
+TreeLinkNode start = root;
+while (start != null) {
+	TreeLinkNode cur = start;
+	while (cur != null) {
+		if (cur.left != null) cur.left.next = cur.right;
+		if (cur.right != null && cur.next != null) cur.right.next = cur.next.left;
+		cur = cur.next;
+	}
+	start = start.left;
+}
+}
+    
+    //Leetcode 297. Serialize and Deserialize Binary Tree
+    public class Codec {
+    	private String NN = "null";
+    	private String sp = ",";
+    	
+        public String serialize(TreeNode root) {
+            StringBuilder sb = new StringBuilder();
+            build(root, sb);
+            return sb.toString();
+        }
+
+        private void build(TreeNode root, StringBuilder sb) {
+    		if (root == null) {
+    			sb.append(NN).append(sp);
+    		} else {
+    			sb.append(root.val).append(sp);
+    			build(root.left, sb);
+    			build(root.right, sb);
+    		}
+    		
+    	}
+
+    	// Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            Queue<String> queue = new LinkedList<>();
+            queue.addAll(Arrays.asList(data.split(sp)));
+            return decode(queue);
+        }
+
+    	private TreeNode decode(Queue<String> queue) {
+    		String val = queue.remove();
+    		if (val.equals(NN)) return null;
+    		TreeNode root = new TreeNode(Integer.valueOf(val));
+    		root.left = decode(queue);
+    		root.right = decode(queue);
+    		return root;
+    	}
+    }
 }

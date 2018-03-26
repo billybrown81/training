@@ -23,6 +23,7 @@ public class Test {
 			System.out.println("F");
 		}
 		System.out.println(Google_Phone.weightedRandomNumber(new int[] {3,9}));
+		System.out.println(Google_Phone.maxLength(3));
 	}
 
 }
