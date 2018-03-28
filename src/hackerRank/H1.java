@@ -1,4 +1,4 @@
-package hackerRand;
+package hackerRank;
 import java.util.Scanner;
 
 public class H1 {

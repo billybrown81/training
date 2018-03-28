@@ -24,6 +24,9 @@ public class Test {
 		}
 		System.out.println(Google_Phone.weightedRandomNumber(new int[] {3,9}));
 		System.out.println(Google_Phone.maxLength(3));
+		
+		Bloomberg bloomberg = new Bloomberg();
+		System.out.println(bloomberg.valid6digits(012210));
 	}
 
 }

@@ -23,13 +23,7 @@ public class Cache {
 	}
 	
 	private Hashtable<Integer, Node> cache = new Hashtable<>();
-	private PriorityQueue<Node> pq = new PriorityQueue<>(new Comparator<Node>() {
-
-		@Override
-		public int compare(Node a, Node b) {
-			return a.exp_time - b.exp_time;
-		}
-	});
+	private PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> (a.exp_time - b.exp_time));
 	
 	long startTime;
 	public Cache() {

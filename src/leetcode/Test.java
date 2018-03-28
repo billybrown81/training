@@ -1,5 +1,6 @@
 package leetcode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -8,11 +9,11 @@ import leetcode201_300.N290;
 public class Test {
 
 	public static void main(String args[]) {
-		if (N290.wordPattern("abba", "dog cat cat dog")) {
-			System.out.println("True");
-		} else {
-			System.out.println("False");
-		}
+		N1 n1 = new N1();
+		int[] nums = new int[] {1,3,1,3,2,2};
+		int target = 4;
+		System.out.println(Arrays.toString(n1.twoSum2(nums, target).get(0)));
+		System.out.println(Arrays.toString(n1.twoSum3(nums, target).get(1)));
 	}
 	
     public static List<List<Integer>> permuteUnique(int[] nums) {
