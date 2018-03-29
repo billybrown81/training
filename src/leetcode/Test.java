@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import leetcode201_300.N290;
+import leetcode001_049.N1;
+import leetcode250_299.N290;
 
 public class Test {
 

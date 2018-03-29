@@ -3,7 +3,9 @@ package oa;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -274,6 +276,213 @@ public class Bloomberg {
 		DFSHelper(grid, i, j - 1, sb, 'l');
 		DFSHelper(grid, i, j + 1, sb, 'r');
 		sb.append('b');
+	}
+	
+	//210. Course Schedule II
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        if (numCourses == 0) return null;
+        int[] pcount = new int[numCourses], order = new int[numCourses];
+        	int index = 0;
+        for (int i = 0; i < prerequisites.length; i++)
+			pcount[prerequisites[i][0]]++;
+        Queue<Integer> queue = new LinkedList<Integer>();
+        for (int i = 0; i < numCourses; i++)
+			if (pcount[i] == 0) {
+				order[index++] = i;
+				queue.add(i);
+			}
+        while (!queue.isEmpty()) {
+			int cur = queue.poll();
+			for (int i = 0; i < prerequisites.length; i++) {
+				if (cur == prerequisites[i][1]) {
+					pcount[prerequisites[i][0]]--;
+					if (pcount[prerequisites[i][0]] == 0) {
+						order[index++] = prerequisites[i][0];
+						queue.add(prerequisites[i][0]);
+					}
+				}
+			}
+		}
+        return (index == numCourses)? order : new int[0];
+    }
+    
+    //283. Move Zeroes
+    public void moveZeroes(int[] nums) {
+        int i = 0, start = 0;
+        while (i < nums.length) {
+			while (i < nums.length && nums[i] == 0) i++;
+			if (i != start && i < nums.length) swap(nums, i, start);
+			start++;
+			i++;
+		}
+    }
+
+	private void swap(int[] nums, int a, int b) {
+		int tmp = nums[a];
+		nums[a] = nums[b];
+		nums[b] = tmp;
+	}
+	
+	//Insert BST
+	TreeNode insertRec(TreeNode root, int key) {
+		 
+        /* If the tree is empty, return a new node */
+        if (root == null) {
+            root = new TreeNode(key);
+            return root;
+        }
+ 
+        /* Otherwise, recur down the tree */
+        if (key < root.val)
+            root.left = insertRec(root.left, key);
+        else if (key > root.val)
+            root.right = insertRec(root.right, key);
+ 
+        /* return the (unchanged) node pointer */
+        return root;
+    }
+	
+	//42. Trapping Rain Water
+    public int trap(int[] height) {
+        int start = 0, end = height.length - 1;
+        int left = 0, right = 0;
+        int res = 0;
+        while (start <= end) {
+			left = Math.max(left, height[start]);
+			right = Math.max(right, height[end]);
+			if (left < right) {
+				res += left - height[start];
+				start++;
+			} else {
+				res += right - height[end];
+				end--;
+			}
+		}
+        return res;
+    }
+    //162. Find Peak Element
+    int findPeakElement(int[] num) 
+    {
+        int low = 0;
+        int high = num.length-1;
+        
+        while(low < high)
+        {
+            int mid1 = (low+high)/2;
+            int mid2 = mid1+1;
+            if(num[mid1] < num[mid2])
+                low = mid2;
+            else
+                high = mid1;
+        }
+        return low;
+    }
+    
+    //69. sqrt(x)
+    public int mySqrt(int x) {
+		if (x == 0) {
+			return 0;
+		}
+		int start = 1, end = x;
+		while (start < end) {
+			int mid = start + (end - start) / 2;
+			if (mid > x / mid) {
+				end = mid - 1;
+			} else {
+				if ((mid + 1) > x / (mid + 1)) {
+					return mid;
+				}
+				start = mid + 1;
+			}
+		}
+		return start;
+    }
+    //628. Maximum Product of Three Numbers
+    public int maximumProduct(int[] nums) {
+        if (nums.length < 3) return 0;
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+        for (int i : nums) {
+			if (i > max1) {
+				max3 = max2;
+				max2 = max1;
+				max1 = i;
+			} else if (i > max2) {
+				max3 = max2;
+				max2 = i;
+			} else if (i > max3) {
+				max3 = i;
+			}
+			if (i < min1) {
+				min2 = min1;
+				min1 = i;
+			} else if (i < min2) {
+				min2 = i;
+			}
+		}
+        return Math.max(max1 * max2 * max3, max1 * min1 * min2);
+    }
+    
+    //s1 = "How about today and today is a nice day"
+//    s2 = "How and today nice"
+//    		按顺序打印出s2 中缺少的s1 中有的单词。
+//    		接着follow up 是：
+//    		如果s2 中的单词无序，譬如.
+//    		s2 = "nice and how today"
+//    		那么程序怎么改？（此时输出也可以无序）
+    public void missingWords(String s1, String s2) {
+		String[] ch1 = s1.split(" "), ch2 = s2.split(" ");
+		int p1 = 0, p2 = 0;
+		while (p1 < ch1.length && p2 < ch2.length) {
+			if (!ch1[p1].equals(ch2[p2])) {
+				System.out.println(ch1[p1]);
+				p1++;
+			} else {
+				p1++; p2++;
+			}
+		}
+		while (p1 < ch1.length) {
+			System.out.println(ch1[p1]);
+			p1++;
+		}
+	}
+    public void missingWords2(String s1, String s2) {
+		String[] ch1 = s1.split(" "), ch2 = s2.split(" ");
+		Set<String> set = new HashSet<>();
+		for (String s : ch2) {
+			set.add(s);
+		}
+		for (String s : ch1) {
+			if (set.contains(s)) {
+				set.remove(s);
+			} else {
+				set.add(s);
+			}
+		}
+		System.out.println(set);
+	}
+    
+    
+    //254. Factor Combinations
+    public List<List<Integer>> getFactors(int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        DFSHelper(res, new ArrayList<Integer>(), n, 2);
+        return res;
+    }
+
+	private void DFSHelper(List<List<Integer>> res, ArrayList<Integer> path, int n, int index) {
+			if (path.size() >= 1) {
+				path.add(n);
+				res.add(new ArrayList<>(path));
+				path.remove(path.size()-1);
+			}
+		for (int i = index; i * i <= n; i++) {
+			if (n % i == 0) {
+				path.add(i);
+				DFSHelper(res, path, n / i, i);
+				path.remove(path.size() - 1);
+			}
+		}
 	}
 	
 }

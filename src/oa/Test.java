@@ -27,6 +27,8 @@ public class Test {
 		
 		Bloomberg bloomberg = new Bloomberg();
 		System.out.println(bloomberg.valid6digits(012210));
+		bloomberg.missingWords("How about today and today is a nice day", "How and today nice");
+		bloomberg.missingWords2("How about today and today is a nice day", "nice and how today");
 	}
 
 }
