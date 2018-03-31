@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import leetcode001_049.N1;
+import leetcode001_049.N01;
 import leetcode250_299.N290;
 
 public class Test {
 
 	public static void main(String args[]) {
-		N1 n1 = new N1();
+		N01 n1 = new N01();
 		int[] nums = new int[] {1,3,1,3,2,2};
 		int target = 4;
 		System.out.println(Arrays.toString(n1.twoSum2(nums, target).get(0)));
