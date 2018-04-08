@@ -2,6 +2,7 @@ package google_on_site;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Test {
 
@@ -30,5 +31,7 @@ public class Test {
 		
 		TwoStrings twoStrings = new TwoStrings();
 		System.out.println(twoStrings.generate("ab", "cd"));
+		Random random = new Random();
+		System.out.println(random.nextInt(100));
 	}
 }
