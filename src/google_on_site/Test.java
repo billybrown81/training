@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import leetcode400_449.Reconstruction;
+
 public class Test {
 
 	public static void main(String[] args) {
@@ -33,5 +35,11 @@ public class Test {
 		System.out.println(twoStrings.generate("ab", "cd"));
 		Random random = new Random();
 		System.out.println(random.nextInt(100));
+		
+		Reconstruction reconstruction = new Reconstruction();
+		System.out.println(reconstruction.rec(new int[] {0, 1, 2, 1, 0})[4]);
+		
+		RandomBS randomBS = new RandomBS();
+		System.out.println(randomBS.validElements(new int[] {5, 1, 4, 3, 6, 8, 10, 7, 9}));
 	}
 }
