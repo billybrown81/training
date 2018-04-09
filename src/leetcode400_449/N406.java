@@ -34,5 +34,6 @@ public class N406 {
 			res[i][1] = tmp.get(i)[1];
 		}
 		return res;
+		
     }
 }
