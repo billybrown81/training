@@ -8,4 +8,23 @@ public class On_Site {
 		}
 		return i == a.length();
 	}
+	
+	public int minTwoes(int N) {
+		int count = 0, n = N;
+		while (n > 0) {
+			if ((n & 1) == 1) count++;
+			n >>>= 1;
+		}
+		return count;
+	}
+	
+	public int minTwoesN(int N) {
+		int res = minTwoes(N);
+		int n = 1;
+		while (n < N) {
+			n *= 2;
+		}
+		res = Math.min(res, minTwoes(n) + minTwoes(n - N));
+		return res;
+	}
 }

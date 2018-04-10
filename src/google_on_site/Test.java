@@ -39,5 +39,8 @@ public class Test {
 		
 		RandomBS randomBS = new RandomBS();
 		System.out.println(randomBS.validElements(new int[] {5, 1, 4, 3, 6, 8, 10, 7, 9}));
+		
+		System.out.println(oSite.minTwoes(7));
+		System.out.println(oSite.minTwoesN(7));
 	}
 }
