@@ -30,4 +30,16 @@ public class C3_IOT {
 		ch[i] = tmp;
 		return String.valueOf(ch);
 	}
+	
+	public int findMinInsertionPalindrome(String s) {
+		int n = s.length();
+		int[][] dp = new int[n][n];
+		for (int l = 1; l < n; l++) {
+			for (int i = 0; i + l < n; i++) {
+				int j = i + l;
+				dp[i][j] = s.charAt(i) == s.charAt(j) ? dp[i + 1][j - 1] : Math.min(dp[i][j - 1], dp[i + 1][j] + 1);
+			}
+		}
+		return dp[0][n - 1];
+	}
 }

@@ -1,8 +1,11 @@
 package google_on_site;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class Test {
 
@@ -42,5 +45,24 @@ public class Test {
 		
 		System.out.println(oSite.minTwoes(7));
 		System.out.println(oSite.minTwoesN(7));
+		
+		Integer[] arr = new Integer[] {0,1,2,3,4,5};
+		List<Integer> list2 = Arrays.asList(arr);
+		Integer[] arr2 = new Integer[] {0,1,3};
+		Set<Integer> set = new HashSet<>(Arrays.asList(arr2));
+		System.out.println(oSite.containsSublist(list2, set));
+		
+		int[][] matrix = new int[][] {
+				new int[] {1, 0, 0, 1, 0},
+				new int[] {0, 0, 1, 0, 1},
+				new int[] {0, 0, 0, 1, 0},
+				new int[] {1, 0, 1, 0, 1}
+		};
+		System.out.println(oSite.hasRec(matrix));
+		
+		System.out.println(oSite.areBuddies("conserve", "converse"));
+		System.out.println(oSite.areBuddiesN("listen", "silent", 5));
+		
+		System.out.println(oSite.p21());
 	}
 }
