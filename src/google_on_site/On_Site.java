@@ -141,4 +141,85 @@ public class On_Site {
 		}
 		return 1 - dp[17] - dp[18] - dp[19] - dp[20] - dp[21];
 	}
+	
+	public boolean isIn(int[][] arr, int[] point) {
+		int x = point[0], y = point[1];
+		int count = 0;
+		for (int i = 0; i < arr.length; i++) {
+			int x1 = arr[i][0], y1 = arr[i][1];
+			int x2 = i < arr.length - 1? arr[i + 1][0] : arr[0][0];
+			int y2 = i < arr.length - 1? arr[i + 1][1] : arr[0][1];
+			if (y > Math.min(y1, y2) && y <= Math.max(y1, y2)) {
+				if (y1 == y2) {
+					if (x >= Math.min(x1, x2) && x <= Math.max(x1, x2)) return true;
+					if (x < Math.min(x1, x2)) count++;
+				} else if (x1 == x2) {
+					if (x == x1) return true;
+					if (x < x1) count++;
+				} else {
+					double k = ((double)y1 - (double)y2) / ((double)x1 - (double)x2), b = y1 - k * x1;
+					double xCross = (y - b) / k;
+					if (x == xCross) return true;
+					if (x < xCross) count ++;
+				}
+			}
+		}
+		return count == 1;
+	}
+	
+	public int numberOfClusters(List<List<Integer>> videoPlaylists) {
+		Map<List<Integer>, List<Integer>> map = new HashMap<>();
+		int count = videoPlaylists.size();
+		for (List<Integer> list : videoPlaylists) {
+			map.put(list, list);
+		}
+		for (int i = 0; i < videoPlaylists.size(); i++) {
+			for (int j = 0; j < videoPlaylists.size(); j++) {
+				if (i != j) {
+					Set<Integer> tmp = new HashSet<>();
+					for (Integer integer : videoPlaylists.get(i)) tmp.add(integer);
+					for (Integer integer : videoPlaylists.get(j)) {
+						if (tmp.contains(integer)) {
+							if (!find(videoPlaylists.get(i), map).equals(find(videoPlaylists.get(j), map))) {
+								map.put(find(videoPlaylists.get(i), map), find(videoPlaylists.get(j), map));
+								count--;
+							}
+						}
+					}
+				}
+			}
+		}
+		return count;		
+	}
+
+	private List<Integer> find(List<Integer> list, Map<List<Integer>, List<Integer>> map) {
+		if (map.get(list) == list) {
+			return list;
+		}
+		return find(map.get(list), map);
+	}
+	
+	public int numberOfClusters2(List<List<Integer>> videoPlaylists)  {
+		int count = 0;
+		Map<Integer, Integer> map = new HashMap<>();
+		for (List<Integer> list : videoPlaylists) {
+			int tmp = find2(list.get(0), map);
+			for (int i = 1; i < list.size(); i++) {
+				int cur = find2(list.get(i), map);
+				if (tmp != cur) {
+					map.put(cur, tmp);
+					count--;
+				}
+			}
+		}
+		return count + map.size();
+	}
+
+	private int find2(Integer integer, Map<Integer, Integer> map) {
+		if (!map.containsKey(integer)) map.put(integer, integer);
+		if (integer == map.get(integer)) {
+			return integer;
+		}
+		return find2(map.get(integer), map);
+	}
 }

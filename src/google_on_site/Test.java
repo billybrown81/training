@@ -64,5 +64,33 @@ public class Test {
 		System.out.println(oSite.areBuddiesN("listen", "silent", 5));
 		
 		System.out.println(oSite.p21());
+		
+		Integer[] b = new Integer[] {0, 0, 1, 0, 0, 0, 1, 0};
+		Bench bench = new Bench(b);
+		bench.addPerson();
+		System.out.println(Arrays.asList(bench.arr));
+		bench.addPerson();
+		System.out.println(Arrays.asList(bench.arr));
+		
+		int[][] points = new int[][] {
+			new int[] {0, 0},
+			new int[] {2, 1},
+			new int[] {3, 3},
+			new int[] {1, 4}
+		};
+		int[] point = new int[] {2, 4};
+		System.out.println(oSite.isIn(points, point));
+		
+		List<List<Integer>> list3 = new ArrayList<>();
+		Integer[] arr1 = new Integer[] {1, 2, 4, 5};
+		Integer[] arr02 = new Integer[] {2, 4};
+		Integer[] arr3 = new Integer[] {6};
+		Integer[] arr4 = new Integer[] {5};
+		list3.add(Arrays.asList(arr1));
+		list3.add(Arrays.asList(arr02));
+		list3.add(Arrays.asList(arr3));
+		list3.add(Arrays.asList(arr4));
+		System.out.println(oSite.numberOfClusters(list3));
+		System.out.println(oSite.numberOfClusters2(list3));
 	}
 }
