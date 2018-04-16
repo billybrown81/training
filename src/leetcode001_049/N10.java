@@ -12,7 +12,7 @@ public class N10 {
 		}
         for (int i = 1; i <= m; i++) {
 			for (int j = 1; j <= n; j++) {
-				if (sc[i - 1] == pc[i - 1] || pc[i - 1] == '.') 
+				if (sc[i - 1] == pc[j - 1] || pc[j - 1] == '.') 
 					dp[i][j] = dp[i - 1][j - 1];
 				else if (pc[j - 1] == '*') {
 					if (pc[j - 2] == '.' || pc[j - 2] == sc[i - 1]) {
