@@ -1,8 +1,12 @@
 package google_on_site;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import oa.GlobalOrder;
 
 public class Test2 {
 
@@ -48,5 +52,15 @@ public class Test2 {
 		successor.death("A");
 		successor.death("B");
 		System.out.println(successor.successorList());
+		
+		GlobalOrder gOrder = new GlobalOrder();
+		List<List<String>> list = new ArrayList<>();
+		String[] s1 = new String[] {"e1", "e2", "e3"};
+		String[] s2 = new String[] {"e2"};
+		String[] s3 = new String[] {"e2", "e4", "e3"};
+		list.add(new ArrayList<>(Arrays.asList(s1)));
+		list.add(new ArrayList<>(Arrays.asList(s2)));
+		list.add(new ArrayList<>(Arrays.asList(s3)));
+		System.out.println(gOrder.getGlobalOrder(list));
 	}
 }
