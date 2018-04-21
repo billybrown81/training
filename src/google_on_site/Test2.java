@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
 import oa.GlobalOrder;
 
@@ -62,5 +63,12 @@ public class Test2 {
 		list.add(new ArrayList<>(Arrays.asList(s2)));
 		list.add(new ArrayList<>(Arrays.asList(s3)));
 		System.out.println(gOrder.getGlobalOrder(list));
+		
+		System.out.println(oSite_2.MaxNumMatchingSubseq("chatte", new String[] {"hat", "cat", "hate"}));
+		
+		N809 n809 = new N809();
+		System.out.println(n809.isSimilar("heeellooo", "hello"));
+		
+//		TreeMap<Integer, Integer> treeMap = new TreeMap<>();
 	}
 }

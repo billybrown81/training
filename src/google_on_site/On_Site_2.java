@@ -73,4 +73,39 @@ public class On_Site_2 {
 		}
 		return true;
 	}
+	
+    Map<String, Boolean> cache = new HashMap<>();
+    public String MaxNumMatchingSubseq(String S, String[] words) {
+    		int maxL = 0;
+    		String candidate = "";
+    		for (String word : words) {
+			if (isSubseq(S, word)) {
+				if (word.length() > maxL) {
+					maxL = word.length();
+					candidate = word;
+				}
+			}
+		}
+    		return candidate;
+    }
+
+	private boolean isSubseq(String s, String word) {
+		if (cache.containsKey(word)) {
+			return cache.get(word);
+		}
+		int i = 0, j = 0;
+		while (i < s.length() && j < word.length()) {
+			if (s.charAt(i) == word.charAt(j)) {
+				j++;
+			} 
+			i++;
+		}
+		if (j == word.length()) {
+			cache.put(word, true);
+			return true;
+		} else {
+			cache.put(word, false);
+			return false;
+		}
+	}
 }
